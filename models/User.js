@@ -8,7 +8,6 @@ const userSchema = new mongoose.Schema({
     hashedPassword: { type: String, required: true },
     date_of_birth: { type: Date },
     role: { type: mongoose.Schema.Types.ObjectId, ref: 'Role' },
-    teams: { type: String }
 }, { timestamps: true });
 
 module.exports = mongoose.model('User', userSchema);
