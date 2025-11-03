@@ -1,57 +1,39 @@
 const Task = require('../models/Task');
 const {Types} = require("mongoose");
+const { invalidId } = require('../utils/errorUtils');
+
 
 exports.getAllTasks = async () => {
     try {
-        return await Task.find().populate('user_id', 'name email');
+        return await Task.find({ isDeleted: false }).populate('user_id', 'displayName email');
     } catch (err) {
         console.error('Error fetching all tasks:', err);
-        throw new Error('Failed to fetch tasks');
+        throw err;
     }
 };
 
 exports.getTaskById = async (id) => {
-    try {
-        if (!id || !Types.ObjectId.isValid(id)) {
-            throw new Error('Invalid task ID');
-        }
-
-        const task = await Task.findById(id).populate('user_id', 'name email');
-        if (!task) {
-            throw new Error('Task not found');
-        }
-
-        return task;
-    } catch (err) {
-        console.error(`Error fetching task with id ${id}:`, err.message);
-        throw new Error(`Failed to fetch task: ${err.message}`);
-    }
+    return await Task.findById({ _id: id, isDeleted: false }).populate('user_id', 'displayName email');
 };
 
+
 exports.createTask = async (taskData) => {
-    try {
-        const task = new Task(taskData);
-        return await task.save();
-    } catch (err) {
-        console.error('Error creating task:', err);
-        throw new Error('Failed to create task');
-    }
+    const task = new Task(taskData);
+    return await task.save();
+
 };
 
 exports.updateTask = async (id, taskData) => {
-    try {
-        return await Task.findByIdAndUpdate(id, taskData, { new: true });
-    } catch (err) {
-        console.error(`Error updating task with id ${id}:`, err);
-        throw new Error('Failed to update task');
-    }
+    return Task.findByIdAndUpdate(id, taskData, {new: true, runValidators: true});
 };
 
 exports.deleteTask = async (id) => {
-    try {
-        return await Task.findByIdAndDelete(id);
-    } catch (err) {
-        console.error(`Error deleting task with id ${id}:`, err);
-        throw new Error('Failed to delete task');
-    }
+    // return Task.findByIdAndDelete(id);
+
+    // soft delete
+    return Task.findByIdAndUpdate(
+        id,
+        {isDeleted: true},
+        {new: true}
+    );
 };

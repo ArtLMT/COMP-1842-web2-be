@@ -1,14 +1,28 @@
 const mongoose = require('mongoose');
 require('./User');
-require('./Status');
+// require('./Status');
 
 const taskSchema = new mongoose.Schema({
-    user_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-    status_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Status' },
-    title: { type: String, required: true },
+    user_id: {
+        required: true,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    status: {
+        type: String,
+        enum: ['todo', 'in_progress', 'done'],
+        default: 'todo',
+        required: true
+    },
+    title: {
+        type: String,
+        required: true
+    },
     description: { type: String },
     dueDate: { type: Date },
-    is_deleted: { type: Boolean, default: false }
+    isDeleted: {
+        type: Boolean,
+        default: false }
 }, { timestamps: true });
 
 module.exports = mongoose.model('Task', taskSchema);
