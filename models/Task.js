@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-require('./User');
+import mongoose from "mongoose";
+import User from "./User.js";
 // require('./Status');
 
 const taskSchema = new mongoose.Schema({
@@ -25,4 +25,7 @@ const taskSchema = new mongoose.Schema({
         default: false }
 }, { timestamps: true });
 
-module.exports = mongoose.model('Task', taskSchema);
+// module.exports = mongoose.model('Task', taskSchema);
+console.log( typeof taskSchema, 'Keys:', Object.keys(taskSchema));
+
+export default mongoose.model('Task', taskSchema);
