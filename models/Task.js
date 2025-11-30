@@ -26,6 +26,6 @@ const taskSchema = new mongoose.Schema({
 }, { timestamps: true });
 
 // module.exports = mongoose.model('Task', taskSchema);
-console.log( typeof taskSchema, 'Keys:', Object.keys(taskSchema));
+// console.log( typeof taskSchema, 'Keys:', Object.keys(taskSchema));
 
 export default mongoose.model('Task', taskSchema);

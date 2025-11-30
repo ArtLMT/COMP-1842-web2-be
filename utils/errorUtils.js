@@ -18,5 +18,4 @@ export const invalidId = (id, message = 'Invalid resource') => {
     }
 }
 
-// Sử dụng Named Exports cho từng hàm
 export const throwIfNotFound = sourceNotFound;

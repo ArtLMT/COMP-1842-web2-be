@@ -1,7 +1,5 @@
-// Ví dụ: task.controller.js (Đã refactor sang ES Modules)
-
-import taskService from '../services/taskService.js'; // Thêm đuôi file
-import { invalidId, throwIfNotFound } from '../utils/errorUtils.js'; // Named import cho các hàm tiện ích
+import taskService from '../services/taskService.js';
+import { invalidId, throwIfNotFound } from '../utils/errorUtils.js';
 
 export const getAllTasks = async (req, res, next) => {
     try {
@@ -27,7 +25,7 @@ export const getTaskById = async (req, res, next) => {
 export const getTask = async (req, res, next) => {
     try {
         const {status} = req.params;
-        if (status && !['todo', 'in_progress', 'done'].includes(status)) {
+        if (status && !['todo', 'in_progress', 'done'].includes(status)) { // Sau này sẽ cho user tự thêm status, nên chỗ này cần lưu ý
             return res.status(400).json({ message: 'Invalid status' });
         }
         let tasks;
@@ -46,14 +44,12 @@ export const getTask = async (req, res, next) => {
 
 export const getTasks = async (req, res, next) => {
     try {
-        const { status } = req.query; // destructuring query params
+        const { status } = req.query;
         let tasks;
 
         if (status) {
-            // Nếu có query ?status=...
             tasks = await taskService.getTaskByStatus(status);
         } else {
-            // Nếu không có thì lấy tất cả
             tasks = await taskService.getAllTasks();
         }
 
@@ -78,7 +74,6 @@ export const createTask = async (req, res, next) => {
             });
         }
 
-        // For other types of errors
         res.status(error.statusCode || 500).json({
             status: 'error',
             message: error.message || 'Something went wrong'

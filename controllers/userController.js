@@ -1,7 +1,5 @@
-// Ví dụ: controllers/userController.js (Đã refactor sang ES Modules)
-
-import * as userService from '../services/userService.js'; // Import Named Exports từ Service
-import { invalidId, throwIfNotFound } from '../utils/errorUtils.js'; // Import Named Exports từ Utils
+import userService from '../services/userService.js';
+import { invalidId, throwIfNotFound } from '../utils/errorUtils.js';
 
 export const getUserById = async (req, res, next) => {
     try {

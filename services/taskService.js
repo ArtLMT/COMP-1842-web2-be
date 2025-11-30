@@ -1,7 +1,4 @@
-// Ví dụ: task.service.js (Refactor thành Object Literal)
-
 import Task from '../models/Task.js';
-// Giả sử bạn muốn sử dụng các hàm tiện ích:
 // import { invalidId } from '../utils/errorUtils.js';
 
 const taskService = {
