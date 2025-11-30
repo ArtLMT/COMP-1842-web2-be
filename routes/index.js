@@ -1,10 +1,9 @@
-var express = require('express');
-var router = express.Router();
+import express from 'express';
 
-/* GET home page. */
-// nghĩa là khi người dùng vào "/", server sẽ gửi lại
+const router = express.Router();
+
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+    res.render('index', { title: 'Express' });
 });
 
-module.exports = router;
+export default router;

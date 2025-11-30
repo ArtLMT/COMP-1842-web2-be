@@ -1,6 +1,6 @@
-const {Types} = require("mongoose");
+import { Types } from 'mongoose';
 
-function sourceNotFound(resource, message = 'Resource not found') {
+export const sourceNotFound = (resource, message = 'Resource not found') => {
     if (!resource) {
         const error = new Error(message);
         error.status = 'fail';
@@ -9,7 +9,7 @@ function sourceNotFound(resource, message = 'Resource not found') {
     }
 }
 
-function invalidId(id, message = 'Invalid resource') {
+export const invalidId = (id, message = 'Invalid resource') => {
     if (!id || !Types.ObjectId.isValid(id)) {
         const error = new Error(message);
         error.statusCode = 400;
@@ -17,9 +17,5 @@ function invalidId(id, message = 'Invalid resource') {
         throw error;
     }
 }
-module.exports = {
-    throwIfNotFound: sourceNotFound,
-    invalidId: invalidId
-};
 
-
+export const throwIfNotFound = sourceNotFound;

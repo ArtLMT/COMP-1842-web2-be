@@ -1,7 +1,7 @@
-const userService = require('../services/userService');
-const { invalidId, throwIfNotFound } = require('../utils/errorUtils');
+import userService from '../services/userService.js';
+import { invalidId, throwIfNotFound } from '../utils/errorUtils.js';
 
-exports.getUserById = async (req, res, next) => {
+export const getUserById = async (req, res, next) => {
     try {
         invalidId(req.params.id, 'Invalid user ID');
         const user = await userService.getUserById(req.params.id);
@@ -12,7 +12,7 @@ exports.getUserById = async (req, res, next) => {
     }
 };
 
-exports.getAllUser = async (req, res, next) => {
+export const getAllUser = async (req, res, next) => {
     try {
         const users = await userService.getAllUsers();
         throwIfNotFound(users, 'User not found');
@@ -20,9 +20,10 @@ exports.getAllUser = async (req, res, next) => {
     } catch (error) {
         next(error);
     }
-};
+}
 
-exports.createUser = async (req, res, next) => {
+
+export const createUser = async (req, res, next) => {
     try {
         const user = await userService.createUser(req.body);
         res.status(201).json(user);
@@ -31,7 +32,7 @@ exports.createUser = async (req, res, next) => {
     }
 }
 
-exports.updateUser = async (req,res, next) => {
+export const updateUser = async (req,res, next) => {
     try {
         invalidId(req.params.id, 'Invalid user ID');
         const user = await userService.updateUser(req.params.id, req.body);
@@ -43,7 +44,7 @@ exports.updateUser = async (req,res, next) => {
     }
 }
 
-exports.deleteUser = async (req, res, next) => {
+export const deleteUser = async (req, res, next) => {
     try {
         invalidId(req.params.id, 'Invalid user ID');
         const user = await userService.deleteUser(req.params.id);
