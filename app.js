@@ -6,8 +6,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import { fileURLToPath } from 'url';
 
-import indexRouter from './routes/index.js'; 
-import taskRouter from './routes/tasks.js'; 
+import taskRouter from './routes/words.js';
 import userRouter from './routes/users.js'; 
 // import statusRouter from './routes/status.js'; 
 
@@ -32,7 +31,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(cors());
 
-app.use('/', indexRouter);
 app.use('/tasks', taskRouter);
 app.use('/users', userRouter);
 // app.use('/status', statusRouter);
