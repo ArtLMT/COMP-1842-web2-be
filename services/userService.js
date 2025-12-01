@@ -1,5 +1,4 @@
 import User from '../models/User.js';
-// import { Types } from 'mongoose';
 
 const userService = {
     getAllUsers: async () => {
@@ -13,7 +12,6 @@ const userService = {
 
     getUserById: async (id) => {
         try {
-            // Lưu ý: findById đã nhận id làm tham số đầu tiên, không cần bọc trong object
             return await User.findOne({ _id: id, isDeleted: false });
 
         } catch (error) {
@@ -31,8 +29,6 @@ const userService = {
     },
 
     deleteUser: async (id) => {
-        // return User.findByIdAndDelete(id)
-
         return User.findByIdAndUpdate(
             id,
             { isDeleted: true },

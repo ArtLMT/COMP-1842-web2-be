@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import './Role.js';
 
 const userSchema = new mongoose.Schema({
     displayName: {
