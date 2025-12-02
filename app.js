@@ -31,7 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(cors());
 
-app.use('/tasks', taskRouter);
+app.use('/words', taskRouter);
 app.use('/users', userRouter);
 // app.use('/status', statusRouter);
 
